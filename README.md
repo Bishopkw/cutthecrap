@@ -1,50 +1,61 @@
-# Welcome to your Expo app 👋
+# Cut the Crap - Recipe App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Cut the Crap is a minimalist recipe app designed to give users only the essential information needed to make a recipe—no fluff, no distractions. Our mission is to streamline the cooking experience by presenting clean, concise instructions and ingredients, so you can focus on what matters: cooking great food.
 
-## Get started
+## Features
 
-1. Install dependencies
+- **Minimalist Design**: No ads, no long stories, just the recipe.
+- **Essential Ingredients**: Only the ingredients you need—nothing more.
+- **Step-by-Step Instructions**: Clear, concise, and easy-to-follow directions.
+- **Search Functionality**: Quickly find recipes by ingredient, name, or category.
+- **Favorites**: Save your favorite recipes for quick access.
+- **User-Friendly Interface**: A simple, intuitive design that’s easy to navigate.
 
-   ```bash
-   npm install
-   ```
+## Installation
 
-2. Start the app
+To install and run Cut the Crap on your local machine:
 
-   ```bash
-    npx expo start
-   ```
+1. **Clone the repository**:
+    ```bash
+    git clone https://github.com/yourusername/cut-the-crap.git
+    cd cut-the-crap
+    ```
 
-In the output, you'll find options to open the app in a
+2. **Install dependencies**:
+    ```bash
+    npm install
+    ```
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+3. **Run the app**:
+    ```bash
+    npm start
+    ```
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+4. **Build for production**:
+    ```bash
+    npm run build
+    ```
 
-## Get a fresh project
+## Usage
 
-When you're ready, run:
+- **Search Recipes**: Use the search bar to find recipes based on ingredients, names, or categories.
+- **View Recipe**: Click on a recipe to view only the essential details—ingredients and instructions.
+- **Save Favorites**: Click the heart icon to save a recipe to your favorites list for easy access later.
 
-```bash
-npm run reset-project
-```
+## Contributing
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+Contributions are welcome! Please follow these steps:
 
-## Learn more
+1. Fork the repository.
+2. Create a new branch (`git checkout -b feature/YourFeatureName`).
+3. Commit your changes (`git commit -m 'Add your feature'`).
+4. Push to the branch (`git push origin feature/YourFeatureName`).
+5. Open a pull request.
 
-To learn more about developing your project with Expo, look at the following resources:
+## License
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## Join the community
+## Contact
 
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+For any questions or feedback, please reach out at [your.email@example.com](mailto:your.email@example.com).
