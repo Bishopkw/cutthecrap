@@ -1,19 +1,22 @@
-import { SafeAreaView, ScrollView, ViewStyle, View } from "react-native";
+import { SafeAreaView, ScrollView, View, ViewStyle } from "react-native";
 
 interface KBScreenWrapperProps {
   children: React.ReactNode;
+  header?: React.ReactNode;
   footer?: React.ReactNode;
   style?: ViewStyle;
 }
 
 export default function KBScreenWrapper({
   children,
+  header,
   footer,
   style,
 }: Readonly<KBScreenWrapperProps>) {
   return (
     <>
       <SafeAreaView>
+        <View style={{ padding: 16 }}>{header}</View>
         <ScrollView
           style={[
             {
@@ -24,7 +27,6 @@ export default function KBScreenWrapper({
         >
           {children}
         </ScrollView>
-        <View style={{}}></View>
       </SafeAreaView>
       {footer}
     </>

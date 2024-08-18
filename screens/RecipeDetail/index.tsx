@@ -13,13 +13,47 @@ import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "@/types";
 
 type RecipeDetailScreenProps = {
-  route: RouteProp<RootStackParamList, 'RecipeSteps'>;
-  navigation: StackNavigationProp<RootStackParamList, 'RecipeSteps'>;
+  route: RouteProp<RootStackParamList, "RecipeDetail">;
+  navigation: StackNavigationProp<RootStackParamList, "RecipeDetail">;
 };
 
-export default function RecipeDetailScreen({ route, navigation }: RecipeDetailScreenProps): React.JSX.Element {
+export default function RecipeDetailScreen({
+  route,
+  navigation,
+}: Readonly<RecipeDetailScreenProps>): React.JSX.Element {
+  const { recipe } = route.params;
+
   return (
     <KBScreenWrapper
+    header={
+<View
+        style={{
+          flexDirection: "row",
+          justifyContent: "space-between",
+        }}
+      >
+        <Pressable
+          onPress={() => {
+            navigation.navigate("RecipeSelector");
+          }}
+          style={{
+            aspectRatio: 1,
+            borderWidth: 1,
+            borderColor: "#000000",
+            borderRadius: 100,
+          }}
+        >
+          <AntDesign
+            name="arrowleft"
+            size={24}
+            color="black"
+            style={{
+              padding: 8,
+            }}
+          />
+        </Pressable>
+      </View>
+    }
       footer={
         <View
           style={{
@@ -32,7 +66,7 @@ export default function RecipeDetailScreen({ route, navigation }: RecipeDetailSc
         >
           <Pressable
             onPress={() => {
-              navigation.navigate("RecipeSteps");
+              navigation.navigate("RecipeSteps", {recipe: recipe});
             }}
           >
             <View
@@ -65,64 +99,22 @@ export default function RecipeDetailScreen({ route, navigation }: RecipeDetailSc
         </View>
       }
     >
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-        }}
-      >
-        <Pressable
-          onPress={() => {
-            navigation.navigate("RecipeSelector");
-          }}
-          style={{
-            aspectRatio: 1,
-            borderWidth: 1,
-            borderColor: "#000000",
-            borderRadius: 100,
-          }}
-        >
-          <AntDesign
-            name="arrowleft"
-            size={24}
-            color="black"
-            style={{
-              padding: 8,
-            }}
-          />
-        </Pressable>
-        <View
-          style={{
-            aspectRatio: 1,
-            borderWidth: 1,
-            borderColor: "#000000",
-            borderRadius: 100,
-          }}
-        >
-          <AntDesign
-            name="heart"
-            size={24}
-            color="black"
-            style={{
-              padding: 8,
-            }}
-          />
-        </View>
-      </View>
+      
 
       <Image
-        source={require("@/assets/images/waffles.jpg")}
+        source={{ uri: recipe.imageURL }}
         style={{ width: "100%", height: 200, borderRadius: 24 }}
       />
       <KBSpacer size={16} />
-      <KBTypography variant="header">Waffles</KBTypography>
-      <RecipeFactsComponent />
+      <KBTypography variant="header">{recipe.title}</KBTypography>
+      {/* <RecipeFactsComponent /> */}
       <KBSpacer size={16} />
-      <TagsComponent />
+      <TagsComponent recipe={recipe}/>
       <KBSpacer size={16} />
-      <IngredientsComponent />
+      <IngredientsComponent recipe={recipe}/>
       <KBSpacer size={16} />
-      <ToolsComponent />
+      <ToolsComponent recipe={recipe}/>
+      <KBSpacer size={160} />
     </KBScreenWrapper>
   );
 }

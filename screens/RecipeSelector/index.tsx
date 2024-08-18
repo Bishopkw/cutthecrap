@@ -1,30 +1,77 @@
+import { RecipeType, RootStackParamList } from "@/types";
+import { RouteProp } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import { Pressable, ImageBackground, View } from "react-native";
+
+import recipes from "@/assets/data/recipes.json";
+
 import KBScreenWrapper from "@/components/KBScreenWrapper";
 import KBSpacer from "@/components/KBSpacer";
 import KBTypography from "@/components/KBTypography";
-import { useNavigation } from "@react-navigation/native";
-import { Pressable, View } from "react-native";
+import { BlurView } from "expo-blur";
 
-export default function RecipeSelectorScreen() {
-  const navigation = useNavigation();
-  const test_recipes = [
-    {
-      title: "Waffle",
-      tags: ["Breakfast", "Fast", "Easy"],
-      tools: ["Waffle Maker"],
-    },
-  ];
+type RecipeSelectorScreenProps = {
+  route: RouteProp<RootStackParamList, "RecipeSelector">;
+  navigation: StackNavigationProp<RootStackParamList, "RecipeSelector">;
+};
+
+export default function RecipeSelectorScreen({
+  route,
+  navigation,
+}: Readonly<RecipeSelectorScreenProps>) {
   return (
     <KBScreenWrapper>
-      {test_recipes.map((recipe) => (
-        <Pressable key={recipe.title} onPress={
-          () => {
-            navigation.navigate("RecipeDetail", { recipe: recipe });
-          }
-        }>
-          <KBTypography variant="header">{recipe.title}</KBTypography>
-          <KBSpacer size={16} />
-        </Pressable>
+      {recipes.map((recipe, index) => (
+        <RecipeItemComponent
+          key={`recipe-item-${index}-${recipe.title}`}
+          recipe={recipe}
+          navigation={navigation}
+        />
       ))}
     </KBScreenWrapper>
+  );
+}
+
+interface RecipeItemComponentProps {
+  recipe: RecipeType;
+  navigation: StackNavigationProp<RootStackParamList, "RecipeSelector">;
+}
+
+function RecipeItemComponent({
+  recipe,
+  navigation,
+}: Readonly<RecipeItemComponentProps>): React.JSX.Element {
+  return (
+    <Pressable
+      onPress={() => {
+        navigation.navigate("RecipeDetail", { recipe: recipe });
+      }}
+    >
+      <ImageBackground
+        source={{uri: recipe.imageURL}}
+        style={{
+          width: "100%",
+          height: 200,
+          borderRadius: 24,
+          overflow: "hidden",
+        }}
+      >
+        <BlurView intensity={12} style={{ flex: 1 }}>
+          <View
+            style={{
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
+              padding: 20,
+            }}
+          >
+            <KBTypography variant="header" style={{ color: "#fff" }}>
+              {recipe.title}
+            </KBTypography>
+          </View>
+        </BlurView>
+      </ImageBackground>
+      <KBSpacer size={32} />
+    </Pressable>
   );
 }

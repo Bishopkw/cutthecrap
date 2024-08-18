@@ -1,17 +1,15 @@
 import KBSpacer from "@/components/KBSpacer";
 import KBTypography from "@/components/KBTypography";
+import { RecipeType } from "@/types";
 import { View } from "react-native";
 
-interface Tool {
-    item: string;
-    }
+interface ToolsComponentProps {
+  recipe: RecipeType;
+}
 
-export default function ToolsComponent() {
-  const test_tools: Tool[] = [
-    {
-        item: "Waffle Maker",
-    },
-  ];
+export default function ToolsComponent({
+  recipe,
+}: Readonly<ToolsComponentProps>) {
   return (
     <>
       {/* Header */}
@@ -23,18 +21,17 @@ export default function ToolsComponent() {
         }}
       >
         <KBTypography variant="header">Tools</KBTypography>
-        <KBTypography>{test_tools.length} {test_tools.length <= 1 ? 'item' : 'items'}</KBTypography>
+        <KBTypography>
+          {recipe.tools.length} {recipe.tools.length <= 1 ? "item" : "items"}
+        </KBTypography>
       </View>
 
       <KBSpacer size={16} />
 
-      <View
-        style={{
-        }}
-      >
-        {test_tools.map((ingredient) => (
+      <View style={{}}>
+        {recipe.tools.map((tool) => (
           <>
-            <ToolComponent key={ingredient.item} tool={ingredient} />
+            <ToolComponent key={tool} tool={tool} />
             <KBSpacer orientation="horizontal" size={8} />
           </>
         ))}
@@ -44,12 +41,10 @@ export default function ToolsComponent() {
 }
 
 interface ToolComponentProps {
-    tool: Tool;
-    }
+  tool: string;
+}
 
-function ToolComponent({
-  tool,
-}: Readonly<ToolComponentProps>) {
+function ToolComponent({ tool }: Readonly<ToolComponentProps>) {
   return (
     <View
       style={{
@@ -57,7 +52,7 @@ function ToolComponent({
         justifyContent: "space-between",
       }}
     >
-      <KBTypography>{tool.item}</KBTypography>
+      <KBTypography>{tool}</KBTypography>
     </View>
   );
 }

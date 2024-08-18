@@ -1,31 +1,17 @@
 import KBSpacer from "@/components/KBSpacer";
 import KBTypography from "@/components/KBTypography";
+import { Measurements, RecipeType } from "@/types";
 import { View } from "react-native";
 
-interface Ingredient {
-    item: string;
-    amount: number;
-    measurement: string;
-    }
+import measurements from "@/assets/data/measurements.json";
 
-export default function IngredientsComponent() {
-  const test_ingredients: Ingredient[] = [
-    {
-        item: "Flour",
-        amount: 1,
-        measurement: "cup",
-    },
-    {
-        item: "Sugar",
-        amount: 1,
-        measurement: "cup",
-    },
-    {
-        item: "Milk",
-        amount: 1,
-        measurement: "cup",
-    },
-  ];
+interface IngredientsComponentProps {
+  recipe: RecipeType;
+}
+
+export default function IngredientsComponent({
+  recipe,
+}: Readonly<IngredientsComponentProps>) {
   return (
     <>
       {/* Header */}
@@ -37,18 +23,21 @@ export default function IngredientsComponent() {
         }}
       >
         <KBTypography variant="header">Ingredients</KBTypography>
-        <KBTypography>{test_ingredients.length} {test_ingredients.length <= 1 ? 'item' : 'items'}</KBTypography>
+        <KBTypography>
+          {recipe.ingredients.length}{" "}
+          {recipe.ingredients.length <= 1 ? "item" : "items"}
+        </KBTypography>
       </View>
 
       <KBSpacer size={16} />
 
-      <View
-        style={{
-        }}
-      >
-        {test_ingredients.map((ingredient) => (
+      <View style={{}}>
+        {recipe.ingredients.map((ingredient) => (
           <>
-            <IngredientComponent key={ingredient.item} ingredient={ingredient} />
+            <IngredientComponent
+              key={ingredient.item}
+              ingredient={ingredient}
+            />
             <KBSpacer orientation="horizontal" size={8} />
           </>
         ))}
@@ -58,12 +47,32 @@ export default function IngredientsComponent() {
 }
 
 interface IngredientComponentProps {
-    ingredient: Ingredient;
-    }
+  ingredient: RecipeType["ingredients"][number];
+}
 
 function IngredientComponent({
   ingredient,
 }: Readonly<IngredientComponentProps>) {
+  const measurementsData: Measurements = measurements;
+
+  let displayMeasurement;
+
+  if (ingredient.quantity === 1) {
+    // Use singular measurement
+    displayMeasurement = `${ingredient.quantity} ${ingredient.measurement}`;
+  } else if (measurementsData[ingredient.measurement]?.plural) {
+    // Use plural measurement
+    displayMeasurement = `${ingredient.quantity} ${
+      measurementsData[ingredient.measurement]?.plural
+    }`;
+  } else if (ingredient.quantity === -1) {
+    // Special to taste measurement
+    displayMeasurement = `To Taste`;
+  } else {
+    // Fail safe
+    displayMeasurement = `${ingredient.quantity} ${ingredient.measurement}`;
+  }
+
   return (
     <View
       style={{
@@ -72,7 +81,7 @@ function IngredientComponent({
       }}
     >
       <KBTypography>{ingredient.item}</KBTypography>
-      <KBTypography>{ingredient.amount} {ingredient.measurement}</KBTypography>
+      <KBTypography>{displayMeasurement}</KBTypography>
     </View>
   );
 }

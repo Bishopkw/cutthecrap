@@ -1,0 +1,11 @@
+{
+    "slice": {
+        "plural": "slices"
+    },
+    "cup": {
+        "plural": "cups"
+    },
+    "tbsp": {
+        "plural": null
+    }
+}

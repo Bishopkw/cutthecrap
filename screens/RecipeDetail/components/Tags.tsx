@@ -3,9 +3,15 @@ import { ScrollView, View } from "react-native";
 import KBTypography from "@/components/KBTypography";
 import { PropsWithChildren } from "react";
 import KBSpacer from "@/components/KBSpacer";
+import { RecipeType } from "@/types";
 
-export default function TagsComponent() {
-  const test_tags = ["Breakfast", "Fast", "Easy"];
+interface TagsComponentProps {
+  recipe: RecipeType;
+}
+
+export default function TagsComponent({
+  recipe,
+}: Readonly<TagsComponentProps>) {
   return (
     <ScrollView
       horizontal
@@ -13,7 +19,7 @@ export default function TagsComponent() {
         flexDirection: "row",
       }}
     >
-      {test_tags.map((tag) => (
+      {recipe.tags.map((tag) => (
         <>
           <TagComponent key={tag}>{tag}</TagComponent>
           <KBSpacer orientation="horizontal" size={8} />

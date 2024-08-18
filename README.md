@@ -17,8 +17,7 @@ To install and run Cut the Crap on your local machine:
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/yourusername/cut-the-crap.git
-    cd cut-the-crap
+    git clone https://github.com/Bishopkw/cutthecrap.git
     ```
 
 2. **Install dependencies**:
@@ -59,3 +58,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Contact
 
 For any questions or feedback, please reach out at [your.email@example.com](mailto:your.email@example.com).
+
+If you would like to support my work, visit
+https://buymeacoffee.com/kalebwbishop
